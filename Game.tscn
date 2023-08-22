@@ -1,6 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cv85bafp0tf4h"]
+[gd_scene load_steps=13 format=3 uid="uid://cv85bafp0tf4h"]
 
 [ext_resource type="Script" path="res://Game.gd" id="1_skk2c"]
+[ext_resource type="Texture2D" uid="uid://dtldav5c7thau" path="res://smoke.png" id="2_khdod"]
+[ext_resource type="AudioStream" uid="uid://ba4v18ditxdr0" path="res://explosion.wav" id="3_ug0wy"]
+[ext_resource type="AudioStream" uid="uid://okqxf5ksbc5p" path="res://horn.wav" id="4_ny4sw"]
 
 [sub_resource type="Gradient" id="Gradient_7ppl2"]
 offsets = PackedFloat32Array(0)
@@ -11,6 +14,29 @@ gradient = SubResource("Gradient_7ppl2")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_af1qw"]
 size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ncgd1"]
+size = Vector2(20, 648)
+
+[sub_resource type="Gradient" id="Gradient_74q32"]
+colors = PackedColorArray(0.786925, 0.208912, 0.187878, 1, 0.939958, 0.542975, 0.255239, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ljodf"]
+gradient = SubResource("Gradient_74q32")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o73h1"]
+emission_shape = 1
+emission_sphere_radius = 128.0
+particle_flag_disable_z = true
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color_ramp = SubResource("GradientTexture1D_ljodf")
+
+[sub_resource type="LabelSettings" id="LabelSettings_j2sno"]
+font_size = 48
+font_color = Color(0.352941, 0.352941, 0.352941, 1)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_skk2c")
@@ -45,4 +71,60 @@ shape = SubResource("RectangleShape2D_af1qw")
 _spawnable_scenes = PackedStringArray("res://Player.tscn")
 spawn_path = NodePath("..")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="GoalLeft" type="Area2D" parent="."]
+position = Vector2(-27, 324)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeft"]
+shape = SubResource("RectangleShape2D_ncgd1")
+
+[node name="GoalRight" type="Area2D" parent="."]
+position = Vector2(1181, 324)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight"]
+shape = SubResource("RectangleShape2D_ncgd1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_o73h1")
+texture = ExtResource("2_khdod")
+one_shot = true
+explosiveness = 1.0
+
+[node name="PlayerOnePoints" type="Label" parent="."]
+offset_left = 62.0
+offset_top = 41.0
+offset_right = 102.0
+offset_bottom = 111.0
+text = "0"
+label_settings = SubResource("LabelSettings_j2sno")
+
+[node name="PlayerTwoPoints" type="Label" parent="."]
+offset_left = 1054.0
+offset_top = 41.0
+offset_right = 1094.0
+offset_bottom = 111.0
+text = "0"
+label_settings = SubResource("LabelSettings_j2sno")
+
+[node name="EffectPlayer1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ug0wy")
+volume_db = -10.0
+
+[node name="EffectPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ny4sw")
+volume_db = -10.0
+
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
+[connection signal="body_entered" from="GoalLeft" to="." method="_on_goal_left_body_entered"]
+[connection signal="body_entered" from="GoalRight" to="." method="_on_goal_right_body_entered"]

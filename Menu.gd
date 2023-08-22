@@ -21,5 +21,5 @@ func _spawn_player(id = 1) -> void:
 	$Game.call_deferred("add_child", player)
 
 func _on_join_button_pressed() -> void:
-	Networking.peer.create_client("localhost", Networking.PORT)
+	Networking.peer.create_client(%HostIPTextEdit.text, Networking.PORT)
 	multiplayer.multiplayer_peer = Networking.peer
