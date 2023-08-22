@@ -1,7 +1,7 @@
 extends Control
 class_name Menu
 
-var player_scene := preload("res://Player.tscn")
+var player_scene := preload("res://components/player/Player.tscn")
 
 @onready var game: Game = $Game
 

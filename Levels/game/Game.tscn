@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://cv85bafp0tf4h"]
 
-[ext_resource type="Script" path="res://Game.gd" id="1_skk2c"]
-[ext_resource type="Texture2D" uid="uid://dtldav5c7thau" path="res://smoke.png" id="2_khdod"]
-[ext_resource type="AudioStream" uid="uid://ba4v18ditxdr0" path="res://explosion.wav" id="3_ug0wy"]
-[ext_resource type="AudioStream" uid="uid://okqxf5ksbc5p" path="res://horn.wav" id="4_ny4sw"]
+[ext_resource type="Script" path="res://Levels/game/Game.gd" id="1_skk2c"]
+[ext_resource type="Texture2D" uid="uid://dtldav5c7thau" path="res://assets/visual/smoke.png" id="2_lkde3"]
+[ext_resource type="AudioStream" uid="uid://ba4v18ditxdr0" path="res://assets/audio/explosion.wav" id="3_4mbid"]
+[ext_resource type="AudioStream" uid="uid://okqxf5ksbc5p" path="res://assets/audio/horn.wav" id="4_pyvd3"]
 
 [sub_resource type="Gradient" id="Gradient_7ppl2"]
 offsets = PackedFloat32Array(0)
@@ -68,7 +68,7 @@ position = Vector2(575, 648)
 shape = SubResource("RectangleShape2D_af1qw")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Player.tscn")
+_spawnable_scenes = PackedStringArray("res://components/player/Player.tscn")
 spawn_path = NodePath("..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -97,7 +97,7 @@ texture_filter = 1
 emitting = false
 amount = 100
 process_material = SubResource("ParticleProcessMaterial_o73h1")
-texture = ExtResource("2_khdod")
+texture = ExtResource("2_lkde3")
 one_shot = true
 explosiveness = 1.0
 
@@ -118,11 +118,11 @@ text = "0"
 label_settings = SubResource("LabelSettings_j2sno")
 
 [node name="EffectPlayer1" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_ug0wy")
+stream = ExtResource("3_4mbid")
 volume_db = -10.0
 
 [node name="EffectPlayer2" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_ny4sw")
+stream = ExtResource("4_pyvd3")
 volume_db = -10.0
 
 [connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]

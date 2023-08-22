@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://okqxf5ksbc5p"
-path="res://.godot/imported/horn.wav-6fcc0f8942bff61c979da0d88fa1e3c0.sample"
+path="res://.godot/imported/horn.wav-ae99826b0547914adf22e238bb22a379.sample"
 
 [deps]
 
-source_file="res://horn.wav"
-dest_files=["res://.godot/imported/horn.wav-6fcc0f8942bff61c979da0d88fa1e3c0.sample"]
+source_file="res://assets/audio/horn.wav"
+dest_files=["res://.godot/imported/horn.wav-ae99826b0547914adf22e238bb22a379.sample"]
 
 [params]
 

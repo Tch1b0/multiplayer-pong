@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Ball
 
 const SPEED = 500.0
 

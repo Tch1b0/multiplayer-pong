@@ -6,7 +6,7 @@ enum PlayerNum {
 	TWO
 }
 
-var ball_scene := preload("res://Ball.tscn")
+var ball_scene := preload("res://components/ball/Ball.tscn")
 var scores := {
 	PlayerNum.ONE: 0,
 	PlayerNum.TWO: 0,
@@ -14,7 +14,6 @@ var scores := {
 
 @onready var available_positions = [$Player1Position.position, $Player2Position.position]
 
-@rpc("call_remote")
 func _on_child_entered_tree(node: Node) -> void:
 	if node.is_in_group("Player"):
 		node.position = available_positions.pop_front()
@@ -46,6 +45,7 @@ func handle_goal(body: Node2D, player: PlayerNum) -> void:
 		$EffectPlayer1.play()
 	else:
 		$EffectPlayer2.play()
+	body.queue_free()
 
 func _on_goal_left_body_entered(body: Node2D) -> void:
 	handle_goal(body, PlayerNum.TWO)

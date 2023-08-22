@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://fgldholkwoxn"]
 
-[ext_resource type="Script" path="res://Ball.gd" id="1_tghrn"]
-[ext_resource type="AudioStream" uid="uid://bdtvkr1j7djk3" path="res://blop.mp3" id="2_gf1r6"]
+[ext_resource type="Script" path="res://components/ball/Ball.gd" id="1_kqy5m"]
+[ext_resource type="AudioStream" uid="uid://bdtvkr1j7djk3" path="res://assets/audio/blop.mp3" id="2_24myk"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_qb2vb"]
 radius = 50.0
@@ -20,7 +20,7 @@ properties/0/watch = false
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 3
-script = ExtResource("1_tghrn")
+script = ExtResource("1_kqy5m")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
 mesh = SubResource("SphereMesh_qb2vb")
@@ -32,5 +32,5 @@ shape = SubResource("CircleShape2D_k67hf")
 replication_config = SubResource("SceneReplicationConfig_67smo")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_gf1r6")
+stream = ExtResource("2_24myk")
 volume_db = -10.0
